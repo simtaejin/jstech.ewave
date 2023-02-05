@@ -20,12 +20,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/AdminLTE/index2.html"><b>Admin</b>LTE</a>
+<!--        <a href="/AdminLTE/index2.html"><b>Admin</b>LTE</a>-->
+
     </div>
     <!-- /.login-logo -->
     <div class="card">
+        <div class="text-center"><img src="image/Jisu_logo.gif"></div>
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">JSRO 관리 시스템</p>
 
             <form action="conf/loginAction.php" method="post">
                 <div class="input-group mb-3">
@@ -47,7 +49,7 @@
                 <div class="row">
 
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col">
                         <button type="submit" class="btn btn-primary btn-block">Log In</button>
                     </div>
                     <!-- /.col -->

@@ -4,17 +4,17 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <div class="info-box bg-info">
-                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+<!--                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">geteway 가동율</span>
-                        <span class="info-box-number"><?php echo $operating_rate;?>%</span>
+                        <span class="info-box-text">hub count: 1</span>
+                        <span class="info-box-number">가동율 : 100 %</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: <?php echo $operating_rate;?>%"></div>
                         </div>
                         <span class="progress-description">
-<!--                  70% Increase in 30 Days-->
+                            조회 시점 : 14:55
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -23,18 +23,18 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <div class="info-box bg-success">
-                    <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+<!--                    <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">node 가동율</span>
-                        <span class="info-box-number"><?php echo $node_rate;?>%</span>
+                        <span class="info-box-text">wise board count :2</span>
+                        <span class="info-box-number">가동율 : 100 %</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: <?php echo $node_rate;?>%"></div>
                         </div>
                         <span class="progress-description">
-<!--                  70% Increase in 30 Days-->
-                </span>
+                            조회 시점 : 14:55
+                        </span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -43,17 +43,17 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <div class="info-box bg-warning">
-                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+<!--                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Last input</span>
-                        <span class="info-box-number">41,410</span>
+                        <span class="info-box-text">data Loss</span>
+                        <span class="info-box-number">0</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 70%"></div>
                         </div>
                         <span class="progress-description">
-<!--                  70% Increase in 30 Days-->
+                            조회 시점 : 14:55
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -62,17 +62,17 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <div class="info-box bg-danger">
-                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+<!--                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Last input</span>
-                        <span class="info-box-number">41,410</span>
+                        <span class="info-box-text">sensor count : 11</span>
+                        <span class="info-box-number">가동율 : 100 %</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 70%"></div>
                         </div>
                         <span class="progress-description">
-<!--                  70% Increase in 30 Days-->
+                            조회 시점 : 14:55
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -117,7 +117,7 @@
                                             <div class="card-header">
                                                 <h3 class="card-title">
                                                     <i class="far fa-chart-bar"></i>
-                                                    Line Chart
+                                                    TDS IN, OUT
                                                 </h3>
 
                                                 <div class="card-tools">
@@ -141,7 +141,7 @@
                                             <div class="card-header">
                                                 <h3 class="card-title">
                                                     <i class="far fa-chart-bar"></i>
-                                                    Line Chart
+                                                    압력 IN, OUT
                                                 </h3>
 
                                                 <div class="card-tools">
@@ -167,7 +167,7 @@
                                             <div class="card-header">
                                                 <h3 class="card-title">
                                                     <i class="far fa-chart-bar"></i>
-                                                    Line Chart
+                                                    유량 IN, OUT
                                                 </h3>
 
                                                 <div class="card-tools">
@@ -191,7 +191,7 @@
                                             <div class="card-header">
                                                 <h3 class="card-title">
                                                     <i class="far fa-chart-bar"></i>
-                                                    Line Chart
+                                                    수 처리량ㄴ
                                                 </h3>
 
                                                 <div class="card-tools">
@@ -237,7 +237,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="far fa-chart-bar"></i>
-                            Bar Chart
+                            전력 사용량 기간별
                         </h3>
 
                         <div class="card-tools">
@@ -261,7 +261,7 @@
                 <!-- BAR CHART -->
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Bar Chart</h3>
+                        <h3 class="card-title">물탱크 수위</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -339,17 +339,17 @@
             sin.push([i, Math.sin(i)])
             cos.push([i, Math.cos(i)])
         }
-        var line_data1 = {
+        var line_data1_1 = {
             data : sin,
             color: '#3c8dbc'
         }
-        var line_data2 = {
+        var line_data1_2 = {
             data : cos,
             color: '#00c0ef'
         }
 
 
-        $.plot('#line-chart_1', [line_data1, line_data2], {
+        $.plot('#line-chart_1', [line_data1_1, line_data1_2], {
             grid  : {
                 hoverable  : true,
                 borderColor: '#f3f3f3',
@@ -377,9 +377,23 @@
             }
         })
 
+        var sin = [],
+            cos = []
+        for (var i = 2; i < 14; i += 0.5) {
+            sin.push([i, Math.sin(i)])
+            cos.push([i, Math.cos(i)])
+        }
+        var line_data2_1 = {
+            data : sin,
+            color: '#3c8dbc'
+        }
+        var line_data2_2 = {
+            data : cos,
+            color: '#00c0ef'
+        }
 
 
-        $.plot('#line-chart_2', [line_data1, line_data2], {
+        $.plot('#line-chart_2', [line_data2_1, line_data2_2], {
             grid  : {
                 hoverable  : true,
                 borderColor: '#f3f3f3',
@@ -407,7 +421,23 @@
             }
         })
 
-        $.plot('#line-chart_3', [line_data1, line_data2], {
+        var sin = [],
+            cos = []
+        for (var i = 3; i < 14; i += 0.5) {
+            sin.push([i, Math.sin(i)])
+            cos.push([i, Math.cos(i)])
+        }
+        var line_data3_1 = {
+            data : sin,
+            color: '#3c8dbc'
+        }
+        var line_data3_2 = {
+            data : cos,
+            color: '#00c0ef'
+        }
+
+
+        $.plot('#line-chart_3', [line_data3_1, line_data3_2], {
             grid  : {
                 hoverable  : true,
                 borderColor: '#f3f3f3',
@@ -435,9 +465,23 @@
             }
         })
 
+        var sin = [],
+            cos = []
+        for (var i = 4; i < 14; i += 0.5) {
+            sin.push([i, Math.sin(i)])
+            cos.push([i, Math.cos(i)])
+        }
+        var line_data4_1 = {
+            data : sin,
+            color: '#3c8dbc'
+        }
+        var line_data4_2 = {
+            data : cos,
+            color: '#00c0ef'
+        }
 
 
-        $.plot('#line-chart_4', [line_data1, line_data2], {
+        $.plot('#line-chart_4', [line_data4_1, line_data4_2], {
             grid  : {
                 hoverable  : true,
                 borderColor: '#f3f3f3',
