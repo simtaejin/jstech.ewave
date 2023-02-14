@@ -7,7 +7,7 @@ $query = "
         avg(tds_in) as tds_in,
         avg(tds_out) as tds_out
     from ro_jstech
-    where (create_at >= now() - INTERVAL 4 HOUR)
+    where (create_at >= now() - INTERVAL 12 HOUR)
     group by HOUR(create_at),FLOOR(MINUTE(create_at)/5)*10
     order by create_at asc ;
 ";
