@@ -320,194 +320,63 @@
 </section>
 <script src="plugins/jquery/jquery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(function () {
         $("input[data-bootstrap-switch]").each(function(){
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
 
-        /*
-         * LINE CHART
-         * ----------
-         */
-        //LINE randomly generated data
+        GetTDSData()
 
-        var sin = [],
-            cos = []
-        for (var i = 0; i < 14; i += 0.5) {
-            sin.push([i, Math.sin(i)])
-            cos.push([i, Math.cos(i)])
-        }
-        var line_data1_1 = {
-            data : sin,
-            color: '#3c8dbc'
-        }
-        var line_data1_2 = {
-            data : cos,
-            color: '#00c0ef'
+        function GetTDSData() {
+
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: "../conf/AjaxTDS.data.php",
+                dataType: 'json',
+                success: function (data) {
+                    TDSupdate(data)
+                },  //if success, call update()
+                error: function () {
+                    //if fail, prepare next update
+                    // setTimeout(GetData, updateInterval);
+                }
+            });
         }
 
+        function TDSupdate(_data) {
+            const dataset = _data.pay_load.dataset
 
-        $.plot('#line-chart_1', [line_data1_1, line_data1_2], {
-            grid  : {
-                hoverable  : true,
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor  : '#f3f3f3'
-            },
-            series: {
-                shadowSize: 0,
-                lines     : {
+            $.plot('#line-chart_1', [dataset['tds_in'],dataset['tds_out']], {
+                grid  : {
+                    hoverable  : true,
+                    borderColor: '#f3f3f3',
+                    borderWidth: 1,
+                    tickColor  : '#f3f3f3',
+                },
+                series: {
+                    shadowSize: 0,
+                    lines     : {
+                        show: true
+                    },
+                    points    : {
+                        show: true
+                    }
+                },
+                lines : {
+                    fill : false,
+                    color: ['#3c8dbc', '#f56954']
+                },
+                yaxis : {
                     show: true
                 },
-                points    : {
+
+                xaxis : {
+                    ticks: _data.pay_load.create_at,
                     show: true
                 }
-            },
-            lines : {
-                fill : false,
-                color: ['#3c8dbc', '#f56954']
-            },
-            yaxis : {
-                show: true
-            },
-            xaxis : {
-                show: true
-            }
-        })
-
-        var sin = [],
-            cos = []
-        for (var i = 2; i < 14; i += 0.5) {
-            sin.push([i, Math.sin(i)])
-            cos.push([i, Math.cos(i)])
+            })
         }
-        var line_data2_1 = {
-            data : sin,
-            color: '#3c8dbc'
-        }
-        var line_data2_2 = {
-            data : cos,
-            color: '#00c0ef'
-        }
-
-
-        $.plot('#line-chart_2', [line_data2_1, line_data2_2], {
-            grid  : {
-                hoverable  : true,
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor  : '#f3f3f3'
-            },
-            series: {
-                shadowSize: 0,
-                lines     : {
-                    show: true
-                },
-                points    : {
-                    show: true
-                }
-            },
-            lines : {
-                fill : false,
-                color: ['#3c8dbc', '#f56954']
-            },
-            yaxis : {
-                show: true
-            },
-            xaxis : {
-                show: true
-            }
-        })
-
-        var sin = [],
-            cos = []
-        for (var i = 3; i < 14; i += 0.5) {
-            sin.push([i, Math.sin(i)])
-            cos.push([i, Math.cos(i)])
-        }
-        var line_data3_1 = {
-            data : sin,
-            color: '#3c8dbc'
-        }
-        var line_data3_2 = {
-            data : cos,
-            color: '#00c0ef'
-        }
-
-
-        $.plot('#line-chart_3', [line_data3_1, line_data3_2], {
-            grid  : {
-                hoverable  : true,
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor  : '#f3f3f3'
-            },
-            series: {
-                shadowSize: 0,
-                lines     : {
-                    show: true
-                },
-                points    : {
-                    show: true
-                }
-            },
-            lines : {
-                fill : false,
-                color: ['#3c8dbc', '#f56954']
-            },
-            yaxis : {
-                show: true
-            },
-            xaxis : {
-                show: true
-            }
-        })
-
-        var sin = [],
-            cos = []
-        for (var i = 4; i < 14; i += 0.5) {
-            sin.push([i, Math.sin(i)])
-            cos.push([i, Math.cos(i)])
-        }
-        var line_data4_1 = {
-            data : sin,
-            color: '#3c8dbc'
-        }
-        var line_data4_2 = {
-            data : cos,
-            color: '#00c0ef'
-        }
-
-
-        $.plot('#line-chart_4', [line_data4_1, line_data4_2], {
-            grid  : {
-                hoverable  : true,
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor  : '#f3f3f3'
-            },
-            series: {
-                shadowSize: 0,
-                lines     : {
-                    show: true
-                },
-                points    : {
-                    show: true
-                }
-            },
-            lines : {
-                fill : false,
-                color: ['#3c8dbc', '#f56954']
-            },
-            yaxis : {
-                show: true
-            },
-            xaxis : {
-                show: true
-            }
-        })
 
         /*
          * BAR CHART
@@ -565,7 +434,7 @@
                 },
             ]
         }
-        //-------------
+        //-------------http://localhost:82/AdminLTE/plugins/jqvmap/jquery.vmap.min.js
         //- BAR CHART -
         //-------------
         var barChartCanvas = $('#barChart').get(0).getContext('2d')
