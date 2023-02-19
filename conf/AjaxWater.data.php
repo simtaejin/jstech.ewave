@@ -3,12 +3,12 @@ include_once "../connect.php";
 
 $query = "
     select
-        DATE_FORMAT(create_at, '%Y-%m-%d %H:00:00') as create_at,
+        DATE_FORMAT(create_at, '%Y-%m-%d %H:00:00') as DATE,
         sum(water_in) as water_in,
         sum(water_out) as water_out
     FROM ro_jstech where (create_at >= now() - INTERVAL 12 HOUR)
-    group by create_at
-    order by create_at desc;
+    group by DATE
+    order by DATE desc;
 ";
 $result = mysqli_query($conn, $query);
 $rows = array();
@@ -23,7 +23,7 @@ $create_at_arr = array();
 foreach ($rows as $k => $v) {
     array_push($water_in_arr, array($k, floor($v['water_in'])));
     array_push($water_out_arr, array($k, floor($v['water_out'])));
-    array_push($create_at_arr, array($k, substr($v['create_at'],11,5)));
+    array_push($create_at_arr, array($k, substr($v['DATE'],11,5)));
 }
 
 $water_in = array(

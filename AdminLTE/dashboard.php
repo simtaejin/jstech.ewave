@@ -250,7 +250,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="bar-chart" style="height: 300px;"></div>
+                        <div id="power_chart" style="height: 300px;"></div>
                     </div>
                     <!-- /.card-body-->
                 </div>
@@ -259,9 +259,12 @@
 
             <div class="col-lg-6 col-sm-6">
                 <!-- BAR CHART -->
-                <div class="card card-success">
+                <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">물탱크 수위</h3>
+                        <h3 class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            물탱크 수위 (%)
+                        </h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -273,27 +276,47 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart">
-                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                        </div>
+                        <div id="watertank_chart" style="height: 300px;"></div>
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card-body-->
                 </div>
                 <!-- /.card -->
             </div>
 
         </div>
         <!-- /.row (main row) -->
+        <?php
+            $sql = "select * from ro_control_jstech where mb_id='mb_id 1' order by create_at desc limit 1";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
 
+            $do_work = !$row['do_work'] && "" ? 0 : $row['do_work'];
+            $do_cip = !$row['do_cip'] && "" ? 0 : $row['do_cip'];
+
+            if ($do_work == 1 && $do_cip == 0) {
+                $do_str = "작동중";
+                $do_css = "bg-gradient-primary";
+                $do_checked = "checked";
+            } else if ($do_work == 0 && $do_cip == 0) {
+                $do_str = "멈춤";
+                $do_css = "bg-gradient-danger";
+                $do_checked = "";
+            } else {
+                $do_str = "멈춤";
+                $do_css = "bg-gradient-danger";
+                $do_checked = "";
+            }
+        ?>
         <div class="row">
             <div class="col-lg-6 col-sm-6">
                 <!-- Bootstrap Switch -->
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">시스템 운영</h3>
+                        <button type="button" name="control_button" class="btn btn-block <?php echo $do_css;?> btn-flat btn-sm" style="user-select: auto;"><?php echo $do_str;?></button>
                     </div>
                     <div class="card-body">
-                        <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch>
+                        <input type="checkbox" name="control_checkbox" <?php echo $do_checked;?> data-bootstrap-switch>
 
                     </div>
                 </div>
@@ -308,7 +331,7 @@
                     </div>
                     <div class="card-body">
 
-                        <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                        <input type="checkbox" name="my-checkbox"  checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                     </div>
                 </div>
                 <!-- /.card -->
@@ -325,6 +348,38 @@
         $("input[data-bootstrap-switch]").each(function(){
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
+
+        $("[name='control_checkbox']").on('switchChange.bootstrapSwitch',function (e,data) {
+            $.ajax({
+                url: "../conf/Ajaxcontrol.check.php",
+                dataType: 'json',
+                data: {do_work:data},
+                success: function (data) {
+                    const do_work = data.pay_load.do_work
+                    const do_cip = data.pay_load.do_cip
+                    if (do_work == 1 && do_cip == 0) {
+                        $("[name='control_button']").text('작동중')
+
+                        $("[name='control_button']").addClass("bg-gradient-primary");
+                        $("[name='control_button']").removeClass("bg-gradient-danger");
+                    } else if (do_work == 0 && do_cip == 0) {
+                        $("[name='control_button']").text('멈춤')
+
+                        $("[name='control_button']").addClass("bg-gradient-danger");
+                        $("[name='control_button']").removeClass("bg-gradient-primary");
+                    } else {
+                        $("[name='control_button']").text('멈춤')
+
+                        $("[name='control_button']").addClass("bg-gradient-danger");
+                        $("[name='control_button']").removeClass("bg-gradient-primary");
+                    }
+                },
+                error: function () {
+                    // setTimeout(GetData, updateInterval);
+                }
+            });
+        });
+
 
         GetTDSData()
 
@@ -477,7 +532,6 @@
             })
         }
 
-
         GetThroughputData()
 
         function GetThroughputData() {
@@ -528,107 +582,79 @@
             })
         }
 
-        /*
-         * BAR CHART
-         * ---------
-         */
+        GetPowerData()
 
-        var bar_data = {
-            data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
-            bars: { show: true }
-        }
-        $.plot('#bar-chart', [bar_data], {
-            grid  : {
-                borderWidth: 1,
-                borderColor: '#f3f3f3',
-                tickColor  : '#f3f3f3'
-            },
-            series: {
-                bars: {
-                    show: true, barWidth: 0.5, align: 'center',
+        function GetPowerData() {
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: "../conf/AjaxPower.data.php",
+                dataType: 'json',
+                success: function (data) {
+                    Powerupdate(data)
                 },
-            },
-            colors: ['#3c8dbc'],
-            xaxis : {
-                ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June']]
-            }
-        })
-        /* END BAR CHART */
+                error: function () {
+                    // setTimeout(GetData, updateInterval);
+                }
+            });
+        }
 
+        function Powerupdate(_data) {
+            const dataset = _data.pay_load.dataset
 
-
-        var areaChartData = {
-            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label               : 'Digital Goods',
-                    backgroundColor     : 'rgba(60,141,188,0.9)',
-                    borderColor         : 'rgba(60,141,188,0.8)',
-                    pointRadius          : false,
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : [28, 48, 40, 19, 86, 27, 90]
+            $.plot('#power_chart', [dataset['power']], {
+                grid  : {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor  : '#f3f3f3'
                 },
-                {
-                    label               : 'Electronics',
-                    backgroundColor     : 'rgba(210, 214, 222, 1)',
-                    borderColor         : 'rgba(210, 214, 222, 1)',
-                    pointRadius         : false,
-                    pointColor          : 'rgba(210, 214, 222, 1)',
-                    pointStrokeColor    : '#c1c7d1',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data                : [65, 59, 80, 81, 56, 55, 40]
+                series: {
+                    bars: {
+                        show: true, barWidth: 0.5, align: 'center',
+                    },
                 },
-            ]
-        }
-        //-------------http://localhost:82/AdminLTE/plugins/jqvmap/jquery.vmap.min.js
-        //- BAR CHART -
-        //-------------
-        var barChartCanvas = $('#barChart').get(0).getContext('2d')
-        var barChartData = $.extend(true, {}, areaChartData)
-        var temp0 = areaChartData.datasets[0]
-        var temp1 = areaChartData.datasets[1]
-        barChartData.datasets[0] = temp1
-        barChartData.datasets[1] = temp0
-
-        var barChartOptions = {
-            responsive              : true,
-            maintainAspectRatio     : false,
-            datasetFill             : false
+                colors: ['#3c8dbc'],
+                xaxis : {
+                    ticks: _data.pay_load.create_at,
+                }
+            })
         }
 
-        new Chart(barChartCanvas, {
-            type: 'bar',
-            data: barChartData,
-            options: barChartOptions
-        })
+        GetWaterTankData()
 
-        //---------------------
-        //- STACKED BAR CHART -
-        //---------------------
-        var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-        var stackedBarChartData = $.extend(true, {}, barChartData)
-
-        var stackedBarChartOptions = {
-            responsive              : true,
-            maintainAspectRatio     : false,
-            scales: {
-                xAxes: [{
-                    stacked: true,
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
-            }
+        function GetWaterTankData() {
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: "../conf/AjaxWaterTank.data.php",
+                dataType: 'json',
+                success: function (data) {
+                    GetWaterTankupdate(data)
+                },
+                error: function () {
+                    // setTimeout(GetData, updateInterval);
+                }
+            });
         }
 
-        new Chart(stackedBarChartCanvas, {
-            type: 'bar',
-            data: stackedBarChartData,
-            options: stackedBarChartOptions
-        })
+        function GetWaterTankupdate(_data) {
+            const dataset = _data.pay_load.dataset
+
+            $.plot('#watertank_chart', [dataset['watertank']], {
+                grid  : {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor  : '#f3f3f3'
+                },
+                series: {
+                    bars: {
+                        show: true, barWidth: 0.5, align: 'center',
+                    },
+                },
+                colors: ['#3c8dbc'],
+                xaxis : {
+                    ticks: _data.pay_load.create_at,
+                }
+            })
+        }
+
     });
 </script>

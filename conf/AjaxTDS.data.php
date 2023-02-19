@@ -3,13 +3,13 @@ include_once "../connect.php";
 
 $query = "
     select
-        DATE_FORMAT(create_at, '%Y-%m-%d %H:%i:00') as create_at,
+        DATE_FORMAT(create_at, '%Y-%m-%d %H:%i:00') as DATE,
         avg(tds_in) as tds_in,
         avg(tds_out) as tds_out
     from ro_jstech
     where (create_at >= now() - INTERVAL 12 HOUR)
     group by HOUR(create_at),FLOOR(MINUTE(create_at)/5)*10
-    order by create_at asc ;
+    order by DATE asc ;
 ";
 $result = mysqli_query($conn, $query);
 $rows = array();
@@ -24,7 +24,7 @@ $create_at_arr = array();
 foreach ($rows as $k => $v) {
     array_push($tds_in_arr, array($k, floor($v['tds_in'])));
     array_push($tds_out_arr, array($k, floor($v['tds_out'])));
-    array_push($create_at_arr, array($k, substr($v['create_at'],11,5)));
+    array_push($create_at_arr, array($k, substr($v['DATE'],11,5)));
 }
 
 $tds_in = array(
