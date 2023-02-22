@@ -7,8 +7,8 @@ $query = "
         avg(pressure_in) as pressure_in,
         avg(pressure_out) as pressure_out
     from ro_jstech
-    where (create_at >= now() - INTERVAL 6 HOUR )
-    group by HOUR(create_at),FLOOR(MINUTE(create_at)/5)*10
+    where (create_at >= now() - INTERVAL 1 HOUR )
+    group by HOUR(create_at),FLOOR(MINUTE(create_at)/1)*10
     order by DATE asc ;
 ";
 $result = mysqli_query($conn, $query);

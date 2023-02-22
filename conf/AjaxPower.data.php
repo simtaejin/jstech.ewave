@@ -8,7 +8,7 @@ $query = "
     FROM ro_jstech
     where (create_at >= now() - INTERVAL 6 day)
     group by DATE
-    order by DATE desc;
+    order by DATE asc;
 ";
 $result = mysqli_query($conn, $query);
 $rows = array();

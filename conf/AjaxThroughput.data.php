@@ -3,12 +3,12 @@ include_once "../connect.php";
 
 $query = "
     select
-        DATE_FORMAT(create_at, '%Y-%m-%d %H:00:00') as DATE,
-        round(sum(water_in-water_out)/sum(water_in)*100,1) as throughput
+	DATE_FORMAT(create_at, '%Y-%m-%d %H:00:00') as DATE,
+        round((sum(water_in)-sum(water_in-water_out)),0) as throughput
     FROM ro_jstech
     where (create_at >= now() - INTERVAL 12 HOUR)
-    group by DATE
-    order by DATE desc;
+	    group by DATE
+	    order by DATE asc;
 ";
 $result = mysqli_query($conn, $query);
 $rows = array();

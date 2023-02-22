@@ -8,7 +8,7 @@ $query = "
         sum(water_out) as water_out
     FROM ro_jstech where (create_at >= now() - INTERVAL 12 HOUR)
     group by DATE
-    order by DATE desc;
+    order by DATE asc;
 ";
 $result = mysqli_query($conn, $query);
 $rows = array();
