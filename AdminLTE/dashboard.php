@@ -1,3 +1,15 @@
+<?php
+    $sql = "select * from ro_jstech order by create_at desc limit 1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+
+//    echo $row['tds_in'];
+//    echo $row['tds_out'];
+//    echo $row['pressure_in'];
+//    echo $row['pressure_out'];
+?>
+
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
@@ -7,14 +19,14 @@
 <!--                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">hub count: 1</span>
-                        <span class="info-box-number">가동율 : 100 %</span>
+                        <span class="info-box-text">유입수 TDS 데이터</span>
+                        <span class="info-box-number"><?php echo $row['tds_in'];?> ppm</span>
 
                         <div class="progress">
-                            <div class="progress-bar" style="width: <?php echo $operating_rate;?>%"></div>
+                            <div class="progress-bar" style="width: <?php echo $row['tds_in']/100;?>%"></div>
                         </div>
                         <span class="progress-description">
-                            조회 시점 : 14:55
+                            조회 시점 : <?php echo substr($row['create_at'],11,8);?>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -26,14 +38,14 @@
 <!--                    <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">wise board count :2</span>
-                        <span class="info-box-number">가동율 : 100 %</span>
+                        <span class="info-box-text">처리수 TDS 데이터</span>
+                        <span class="info-box-number"><?php echo $row['tds_out'];?> ppm</span>
 
                         <div class="progress">
-                            <div class="progress-bar" style="width: <?php echo $node_rate;?>%"></div>
+                            <div class="progress-bar" style="width: <?php echo $row['tds_out']/100;?>%"></div>
                         </div>
                         <span class="progress-description">
-                            조회 시점 : 14:55
+                            조회 시점 : <?php echo substr($row['create_at'],11,8);?>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -46,14 +58,14 @@
 <!--                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">data Loss</span>
-                        <span class="info-box-number">0</span>
+                        <span class="info-box-text">전처리 압력 (IN)</span>
+                        <span class="info-box-number"><?php echo $row['pressure_in'];?> bar</span>
 
                         <div class="progress">
-                            <div class="progress-bar" style="width: 70%"></div>
+                            <div class="progress-bar" style="width: <?php echo $row['pressure_in'];?> %"></div>
                         </div>
                         <span class="progress-description">
-                            조회 시점 : 14:55
+                            조회 시점 : <?php echo substr($row['create_at'],11,8);?>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -65,14 +77,14 @@
 <!--                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">sensor count : 11</span>
-                        <span class="info-box-number">가동율 : 100 %</span>
+                        <span class="info-box-text">메인필터 압력 (OUT)</span>
+                        <span class="info-box-number"><?php echo $row['pressure_out'];?> bar</span>
 
                         <div class="progress">
-                            <div class="progress-bar" style="width: 70%"></div>
+                            <div class="progress-bar" style="width: <?php echo $row['pressure_out'];?>%"></div>
                         </div>
                         <span class="progress-description">
-                            조회 시점 : 14:55
+                            조회 시점 : <?php echo substr($row['create_at'],11,8);?>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
