@@ -305,7 +305,7 @@
             $relay1 = !$row['relay1'] && "" ? 0 : $row['relay1'];
             $relay2 = !$row['relay2'] && "" ? 0 : $row['relay2'];
 
-            if ($relay1 == 1 && $relay2 == 0) {
+            if ($relay1 == 1 && $relay2 == 1) {
                 $do_str = "작동중";
                 $do_css = "bg-gradient-primary";
                 $do_checked = "checked";
