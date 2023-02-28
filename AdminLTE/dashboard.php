@@ -298,18 +298,18 @@
         </div>
         <!-- /.row (main row) -->
         <?php
-            $sql = "select * from ro_control_jstech where mb_id='mb_id 1' order by create_at desc limit 1";
+            $sql = "select * from control_data  order by create_at desc limit 1";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result);
 
-            $do_work = !$row['do_work'] && "" ? 0 : $row['do_work'];
-            $do_cip = !$row['do_cip'] && "" ? 0 : $row['do_cip'];
+            $relay1 = !$row['relay1'] && "" ? 0 : $row['relay1'];
+            $relay2 = !$row['relay2'] && "" ? 0 : $row['relay2'];
 
-            if ($do_work == 1 && $do_cip == 0) {
+            if ($relay1 == 1 && $relay2 == 0) {
                 $do_str = "작동중";
                 $do_css = "bg-gradient-primary";
                 $do_checked = "checked";
-            } else if ($do_work == 0 && $do_cip == 0) {
+            } else if ($relay1 == 0 && $relay2 == 0) {
                 $do_str = "멈춤";
                 $do_css = "bg-gradient-danger";
                 $do_checked = "";
