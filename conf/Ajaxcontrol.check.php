@@ -4,11 +4,11 @@ include_once "../connect.php";
 if ($_REQUEST['do_work'] == 'true') {
     $do_work = 1;
 //    $sql = "insert ro_control_jstech set mb_id='mb_id 1', create_at=now(), do_work=1, do_cip=0, check_at=now() ";
-    $sql = "insert control_data set create_at=now(), address='1122', board_type='4', board_number='3', relay1='1', relay2='1' ";
+    $sql = "insert control_data set create_at=now(), address='1122', board_type='4', board_number='3', relay1='1', relay2='0' ";
 
 } else if ($_REQUEST['do_work'] == 'false') {
 //    $sql = "insert ro_control_jstech set mb_id='mb_id 1', create_at=now(), do_work=0, do_cip=0, check_at=now() ";
-    $sql = "insert control_data set create_at=now(), address='1122', board_type='4', board_number='3', relay1='0', relay2='0' ";
+    $sql = "insert control_data set create_at=now(), address='1122', board_type='4', board_number='3', relay1='0', relay2='1' ";
 }
 mysqli_query($conn, $sql);
 

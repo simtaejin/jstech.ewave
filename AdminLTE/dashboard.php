@@ -369,12 +369,12 @@
                 success: function (data) {
                     const do_work = data.pay_load.do_work
                     const do_cip = data.pay_load.do_cip
-                    if (do_work == 1 && do_cip == 1) {
+                    if (do_work == 1 && do_cip == 0) {
                         $("[name='control_button']").text('작동중')
 
                         $("[name='control_button']").addClass("bg-gradient-primary");
                         $("[name='control_button']").removeClass("bg-gradient-danger");
-                    } else if (do_work == 0 && do_cip == 0) {
+                    } else if (do_work == 0 && do_cip == 1) {
                         $("[name='control_button']").text('멈춤')
 
                         $("[name='control_button']").addClass("bg-gradient-danger");
