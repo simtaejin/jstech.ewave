@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <form id="frm" name="frm" action=""  method="post">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
 
                 <!-- About Me Box -->
                 <div class="card card-primary">
@@ -14,31 +14,12 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="form-group">
-                            <?php
-                            $sql = "select distinct (gid) from geteway";
-                            $result = mysqli_query($conn, $sql);
-                            ?>
-                            <label for="exampleInputEmail1">geteway</label>
-                            <select class="custom-select rounded-0" id="geteway" name="geteway">
+
+                            <label for="exampleInputEmail1">md_id</label>
+                            <select class="custom-select rounded-0" id="md_id" name="md_id">
                                 <option value="">선택하세요.</option>
-                                <?php
-                                while($row = mysqli_fetch_array($result)) {
-                                    ?>
-                                    <option value="<?php echo $row['gid']; ?>"><?php echo $row['gid']; ?></option>
-                                    <?php
-                                }
-                                ?>
+                                <option value="7000">두람농장</option>
                             </select>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">node</label>
-                            <select class="custom-select rounded-0" id="node" name="node">
-                                <option value="">선택하세요.</option>
-                            </select>
-
                         </div>
 
                         <hr>
@@ -47,7 +28,24 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">센서</label>
                             <select class="custom-select rounded-0" id="sensor" name="sensor">
                                 <option value="">선택하세요.</option>
+                                <option value="TDSIN">TDS IN</option>
+                                <option value="TDSOUT">TDS OUT</option>
+                                <option value="PRESSUREIN">압력 IN</option>
+                                <option value="PRESSUREOUT">압력 OUT</option>
+                                <option value="WATERIN">유량 IN</option>
+                                <option value="WATEROUT">유량 OUT</option>
+                                <option value="THROUGHPUT">수처리량</option>
+                                <option value="POWER">전력사용량</option>
                             </select>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">날짜</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control float-right" id="reservationtime" name="sdateAtedate">
+                            </div>
                         </div>
 
                         <hr>
@@ -59,76 +57,13 @@
                 <!-- /.card -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-10 ">
                 <div class="card">
-                    <div class="card-header p-2">
-                        <div class="row">
-                            <!-- Date and time range -->
-                            <div class="form-group col-md-5">
-                                <label>시작일시과 종료일 </label>
-
-                                <div class="input-group">
-                                    <input type="text" class="form-control float-right" id="reservationtime" name="sdateAtedate">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
-
-
-                            <!-- radio -->
-                            <div class="form-group col-md-7 " style="text-align: center">
-                                <label>시간간격 </label>
-                                <div class="input-group" style="display: inline-block;text-align: center;">
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary1" name="bun" value="1m" checked>
-                                        <label for="radioPrimary1">
-                                            1m
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary2" name="bun" value="5m">
-                                        <label for="radioPrimary2">
-                                            5m
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary3" name="bun" value="10m">
-                                        <label for="radioPrimary3">
-                                            10m
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary4" name="bun" value="60m">
-                                        <label for="radioPrimary4">
-                                            60m
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary5" name="bun" value="1h">
-                                        <label for="radioPrimary5">
-                                            1h
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary6" name="bun" value="6h">
-                                        <label for="radioPrimary6">
-                                            6h
-                                        </label>
-                                    </div>
-                                    <div class="icheck-primary d-inline col-sm-1">
-                                        <input type="radio" id="radioPrimary7" name="bun" value="1day">
-                                        <label for="radioPrimary7">
-                                            1day
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div><!-- /.card-header -->
                     <div class="card-body">
-                        <canvas id="myChart" style="height: 900px;"></canvas>
-                        <button type="button" class="btn btn-block bg-gradient-primary" id="chart_image_download">Chart Download</button>
-                        <button type="button" class="btn btn-block bg-gradient-primary" id="excel_image_download">Excel Download</button>
+                        <div id="_chart" style="height: 900px;"></div>
+<!--                        <canvas id="myChart" style="height: 900px;"></canvas>-->
+<!--                        <button type="button" class="btn btn-block bg-gradient-primary" id="chart_image_download">Chart Download</button>-->
+<!--                        <button type="button" class="btn btn-block bg-gradient-primary" id="excel_image_download">Excel Download</button>-->
                     </div><!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -158,6 +93,7 @@
 <script>
 
     $(function () {
+        /*
         $("#geteway").change(function () {
             if ($(this).val()) {
                 $.ajax({
@@ -296,5 +232,103 @@
         $("#excel_image_download").click(function () {
             $("#frm").attr("action", "../../conf/excelDownAction.php").submit()
         })
+
+         */
+
+
+        $("#search").click(function () {
+
+            if ($("#md_id").val() == "") {
+                alert("md_id를 입력하세요.");
+                return false;
+            }
+
+            if ($("#sensor").val() == "") {
+                alert("센서를 선택하세요.");
+                return false;
+            }
+
+            if ($("#reservationtime").val() == "") {
+                alert("날짜를 선택하세요.");
+                return false;
+            }
+
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: "../conf/AjaxAll.data.php",
+                type:'post',
+                data: {md_id:$("[name='md_id']").val(), sensor:$("[name='sensor']").val(), sdateAtedate:$("[name='sdateAtedate']").val()},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.pay_load.datatype == "power") {
+                        // alert("1"+data.pay_load.datatype);
+                        update_type_2(data,data.pay_load.datatype)
+                    } else {
+                        // alert("2"+data.pay_load.datatype);
+                        update_type_1(data,data.pay_load.datatype)
+                    }
+
+                },
+                error: function () {
+                    // setTimeout(GetData, updateInterval);
+                }
+            });
+        })
+
+        function update_type_1(_data,type) {
+            const dataset = _data.pay_load.dataset
+
+            $.plot('#_chart', [dataset[type]], {
+                grid  : {
+                    hoverable  : true,
+                    borderColor: '#f3f3f3',
+                    borderWidth: 1,
+                    tickColor  : '#f3f3f3',
+                },
+                series: {
+                    shadowSize: 0,
+                    lines     : {
+                        show: true
+                    },
+                    points    : {
+                        show: true
+                    }
+                },
+                lines : {
+                    fill : false,
+                    color: ['#3c8dbc', '#f56954']
+                },
+                yaxis : {
+                    show: true
+                },
+
+                xaxis : {
+                    ticks: _data.pay_load.create_at,
+                    show: true
+                }
+            })
+        }
+
+        function update_type_2(_data,type) {
+            const dataset = _data.pay_load.dataset
+
+            $.plot('#_chart', [dataset[type]], {
+                grid  : {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor  : '#f3f3f3'
+                },
+                series: {
+                    bars: {
+                        show: true, barWidth: 0.5, align: 'center',
+                    },
+                },
+                colors: ['#3c8dbc'],
+                xaxis : {
+                    ticks: _data.pay_load.create_at,
+                    show: true
+                }
+            })
+        }
     });
 </script>
