@@ -19,7 +19,7 @@
 <!--                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>-->
 
                     <div class="info-box-content">
-                        <span class="info-box-text">유입수 TDS 데이터</span>
+                        <span class="info-box-text">유입수 TDS 값</span>
                         <span class="info-box-number"><?php echo $row['tds_in'];?> ppm</span>
 
                         <div class="progress">
